@@ -3,3 +3,5 @@ venv/
 # Ultralytics stuff
 runs/
 *.pt
+
+__pycache__/
