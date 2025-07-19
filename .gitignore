@@ -1,1 +1,5 @@
 venv/
+
+# Ultralytics stuff
+runs/
+*.pt
