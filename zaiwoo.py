@@ -1,7 +1,9 @@
 from ultralytics import YOLO
 
+import screenshot
+
 model = YOLO("yolo11n.pt")
 
-source = "screen"
+source = screenshot.take()
 
-model.predict("https://ultralytics.com/images/bus.jpg", save=True, imgsz=320, conf=0.5, device="cuda")
+model.predict(source, save=True, imgsz=320, conf=0.5, device="cuda")
