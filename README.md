@@ -41,5 +41,4 @@ An AI-based aimbot for CS:GO.
 
 ## Caveats
 
-- Currently, CS:GO must be run in fullscreen on the main monitor for zAIwoo to work properly. Also, zAIwoo doesn't work with multi-monitor setups. This will be addressed in the future.
 - zAIwoo is slow. This will be addressed in the future.
