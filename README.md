@@ -42,3 +42,7 @@ An AI-based aimbot for CS:GO.
 ## Caveats
 
 - zAIwoo is slow. This will be addressed in the future.
+
+## Issues
+
+- The mouse doesn't move: if you are running CS:GO as administrator (like the crack I have) then you need to start zAIwoo as administrator as well.
