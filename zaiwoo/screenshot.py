@@ -1,9 +1,11 @@
 """Utility to take a screenshot of a window and save the pixels inside a numpy HWC array with BGR channels (0-255)."""
 
 import ctypes as ct
+
 import numpy as np
 import numpy.typing as npt
-import window
+
+from . import window
 
 class ScreenshotException(Exception):
     """An error that happened while trying to take a screenshot."""

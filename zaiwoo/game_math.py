@@ -2,7 +2,7 @@
 from enum import Enum
 import math
 
-from game_settings import AspectRatio, GameSettings
+from .game_settings import AspectRatio, GameSettings
 
 degrees = float
 

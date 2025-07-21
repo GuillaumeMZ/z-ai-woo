@@ -36,7 +36,7 @@ An AI-based aimbot for CS:GO.
 - Run the program:
 
     ```powershell
-    py zaiwoo.py
+    py -m zaiwoo
     ```
 
 ## Caveats

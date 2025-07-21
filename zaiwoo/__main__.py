@@ -1,7 +1,7 @@
 from ultralytics import YOLO
 
-import screenshot
-import window
+from . import screenshot
+from . import window
 
 model = YOLO("yolo11n.pt")
 
