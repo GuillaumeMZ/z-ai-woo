@@ -46,4 +46,5 @@ Since this is nothing less than a cheat, I don't provide the AI model used to ma
 ## Known issues
 
 - zAIwoo doesn't work with scoped weapons such as AWP, AUG, etc. This will NOT be addressed.
+- zAI doesn't work when CS:GO is in fullscreen mode. Be sure to played in windowed mode or in fullscreen windowed mode.
 - The mouse doesn't move: if you are running CS:GO as administrator (like the crack I have) then you need to start zAIwoo as administrator as well.
