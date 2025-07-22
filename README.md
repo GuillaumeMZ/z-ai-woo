@@ -2,6 +2,10 @@
 
 An AI-based aimbot for CS:GO.
 
+## Warning
+
+Since this is nothing less than a cheat, I don't provide the AI model used to make zAIwoo work to avoid people using zAIwoo in multiplayer games.
+
 ## How to install/run
 
 - Download and install [Visual Studio 2022](https://visualstudio.microsoft.com/) (Be sure to check the "desktop development with C++" module)
@@ -39,10 +43,7 @@ An AI-based aimbot for CS:GO.
     py -m zaiwoo
     ```
 
-## Caveats
+## Known issues
 
-- zAIwoo is slow. This will be addressed in the future.
-
-## Issues
-
+- zAIwoo doesn't work with scoped weapons such as AWP, AUG, etc. This will NOT be addressed.
 - The mouse doesn't move: if you are running CS:GO as administrator (like the crack I have) then you need to start zAIwoo as administrator as well.

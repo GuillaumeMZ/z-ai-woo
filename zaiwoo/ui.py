@@ -93,7 +93,7 @@ class ZAIWooUI(QMainWindow):
             self._sensitivity_box.value(),
             self._threshold_box.value()
         )))
-        self._zaiwoo_timer.start(1000)
+        self._zaiwoo_timer.start(50)
 
         self._stop_button.setEnabled(True)
 
