@@ -1,14 +1,10 @@
-from ultralytics import YOLO
+from PySide6.QtWidgets import QApplication
 
-from . import screenshot
-from . import window
+from .ui import ZAIWooUI
 
-model = YOLO("yolo11n.pt")
+app = QApplication()
 
-csgo = window.find("Counter-Strike: Global Offensive")
-if csgo is None:
-    raise Exception("Couldn't find CS:GO.")
+window = ZAIWooUI()
+window.show()
 
-source = screenshot.take(csgo)
-
-model.predict(source, save=True, imgsz=320, conf=0.5, device="cuda")
+app.exec()
