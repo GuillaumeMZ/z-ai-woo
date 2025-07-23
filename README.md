@@ -2,6 +2,10 @@
 
 An AI-based aimbot for CS:GO.
 
+(Click on the image to watch a small demo)
+
+[![Watch the video](https://img.youtube.com/vi/HiWj4NeMS1E/0.jpg)](https://www.youtube.com/watch?v=HiWj4NeMS1E)
+
 ## Warning
 
 Since this is nothing less than a cheat, I don't provide the AI model used to make zAIwoo work to avoid people using it in multiplayer games.
