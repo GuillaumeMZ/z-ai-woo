@@ -4,7 +4,7 @@ An AI-based aimbot for CS:GO.
 
 ## Warning
 
-Since this is nothing less than a cheat, I don't provide the AI model used to make zAIwoo work to avoid people using zAIwoo in multiplayer games.
+Since this is nothing less than a cheat, I don't provide the AI model used to make zAIwoo work to avoid people using it in multiplayer games.
 
 ## How to install/run
 
@@ -42,6 +42,12 @@ Since this is nothing less than a cheat, I don't provide the AI model used to ma
     ```powershell
     py -m zaiwoo
     ```
+
+    You will be greeted by the following UI:
+
+    ![Image](ui.png)
+
+    Configure the options as you wish then click on "Start zAIwoo".
 
 ## Known issues
 
