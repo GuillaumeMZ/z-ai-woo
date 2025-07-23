@@ -2,7 +2,19 @@
 import sys
 
 from PySide6.QtCore import QTimer
-from PySide6.QtWidgets import QApplication, QDoubleSpinBox, QFileDialog, QGridLayout, QLabel, QLineEdit, QMainWindow, QMessageBox, QPushButton, QWidget
+from PySide6.QtWidgets import (
+    QComboBox,
+    QDoubleSpinBox,
+    QFileDialog,
+    QGridLayout,
+    QLabel,
+    QLineEdit,
+    QMainWindow,
+    QMessageBox,
+    QPushButton,
+    QSpinBox,
+    QWidget
+)
 from ultralytics import YOLO
 
 from . import window, zaiwoo
@@ -44,6 +56,16 @@ class ZAIWooUI(QMainWindow):
         self._threshold_box.setSingleStep(0.01)
         self._threshold_box.setValue(0.75)
 
+        iterations_label = QLabel("Iterations/sec:")
+        self._iterations_box = QSpinBox()
+        self._iterations_box.setRange(0, 1000)
+        self._iterations_box.setSingleStep(1)
+        self._iterations_box.setValue(20)
+
+        target_label = QLabel("Target:")
+        self._target_selector = QComboBox()
+        self._target_selector.addItems(["Terrorists", "Counter-terrorists", "Both"])
+
         self._start_button = QPushButton("Start zAIwoo")
         self._start_button.clicked.connect(self._start)
         self._stop_button = QPushButton("Stop zAIwoo")
@@ -58,8 +80,12 @@ class ZAIWooUI(QMainWindow):
         layout.addWidget(self._sensitivity_box, 1, 3, 1, 5)
         layout.addWidget(threshold_label, 2, 0, 1, 3)
         layout.addWidget(self._threshold_box, 2, 3, 1, 5)
-        layout.addWidget(self._start_button, 4, 0, 2, 4)
-        layout.addWidget(self._stop_button, 4, 4, 2, 4)
+        layout.addWidget(iterations_label, 3, 0, 1, 3)
+        layout.addWidget(self._iterations_box, 3, 3, 1, 5)
+        layout.addWidget(target_label, 4, 0, 1, 3)
+        layout.addWidget(self._target_selector, 4, 3, 1, 5)
+        layout.addWidget(self._start_button, 6, 0, 2, 4)
+        layout.addWidget(self._stop_button, 6, 4, 2, 4)
 
         central_widget = QWidget()
         central_widget.setLayout(layout)
@@ -85,15 +111,18 @@ class ZAIWooUI(QMainWindow):
         self._model_path_select.setEnabled(False)
         self._sensitivity_box.setEnabled(False)
         self._threshold_box.setEnabled(False)
+        self._iterations_box.setEnabled(False)
+        self._target_selector.setEnabled(False)
         self._start_button.setEnabled(False)
 
         self._zaiwoo_timer.timeout.connect(zaiwoo.run(zaiwoo.Settings(
             self._csgo_handle,
             self._zaiwoo_model,
             self._sensitivity_box.value(),
-            self._threshold_box.value()
+            self._threshold_box.value(),
+            zaiwoo.Target(self._target_selector.currentIndex())
         )))
-        self._zaiwoo_timer.start(50)
+        self._zaiwoo_timer.start(int(1000 / self._iterations_box.value()))
 
         self._stop_button.setEnabled(True)
 
@@ -101,6 +130,8 @@ class ZAIWooUI(QMainWindow):
         self._model_path_select.setEnabled(True)
         self._sensitivity_box.setEnabled(True)
         self._threshold_box.setEnabled(True)
+        self._iterations_box.setEnabled(True)
+        self._target_selector.setEnabled(True)
         self._stop_button.setEnabled(False)
 
         self._zaiwoo_timer.stop()

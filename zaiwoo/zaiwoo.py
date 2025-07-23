@@ -9,6 +9,12 @@ from ultralytics import YOLO
 from .game_settings import AspectRatio, GameSettings
 from . import game_math, mouse, screenshot, window
 
+class Target(Enum):
+    """Who zAIwoo must target."""
+    TERRORIST = 0
+    COUNTERTERRORIST = 1
+    BOTH = 2
+
 @dataclass
 class Settings:
     """Settings coming from the UI."""
@@ -16,6 +22,7 @@ class Settings:
     zaiwoo_model: YOLO
     in_game_sensitivity: float
     confidence_threshold: float
+    target: Target
 
 class ResultClassType(Enum):
     """The category of a detection result (Counter-terrorist, counter-terrorist head, terrorist, terrorist head)"""
@@ -77,6 +84,18 @@ def _to_clean_result(source_result) -> list[Result]:
 
     return result
 
+def _is_same_type(class_type: ResultClassType, target: Target) -> bool:
+    if target == Target.BOTH:
+        return True
+
+    if target == Target.TERRORIST and class_type in (ResultClassType.T, ResultClassType.T_HEAD):
+        return True
+
+    if target == Target.COUNTERTERRORIST and class_type in (ResultClassType.CT, ResultClassType.CT_HEAD):
+        return True
+
+    return False
+
 def run(settings: Settings):
     "Run zAIwoo"
     def inner() -> None:
@@ -98,12 +117,13 @@ def run(settings: Settings):
         screen = screenshot.take(settings.csgo_handle)
 
         results = _to_clean_result(settings.zaiwoo_model(screen, verbose=False)[0])
-        acceptable_results = list(filter(lambda result: result.confidence >= settings.confidence_threshold, results))
+        acceptable_results = [result for result in results if result.confidence >= settings.confidence_threshold]
+        targetable_results = [result for result in acceptable_results if _is_same_type(result.result_type, settings.target)]
 
-        if not acceptable_results:
+        if not targetable_results:
             return
 
-        closest_box = _closest(acceptable_results, game_settings)
+        closest_box = _closest(targetable_results, game_settings)
 
         delta_x, delta_y = (int(closest_box.x - (game_settings.screen_width / 2)), int(closest_box.y - (game_settings.screen_height / 2)))
         effective_delta_x = game_math.distance_to_effective_pixels(delta_x, game_math.DistanceType.HORIZONTAL, game_settings)
